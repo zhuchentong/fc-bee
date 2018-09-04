@@ -19,6 +19,12 @@ export default class Victory extends Phasar.Scene {
         fontSize: 55
       }
     })
+
+    this.input.keyboard.on('keydown', (event) => {
+      if (event.code === 'Space') {
+        this.scene.start('play')
+      }
+    });
   }
 
   public update() {
