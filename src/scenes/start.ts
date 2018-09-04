@@ -6,21 +6,21 @@ export default class Start extends Phasar.Scene {
 
   private preload() {
     // 加载背景图片
-    this.load.image('background', '/static/bg.png');
+    this.load.image('background', 'static/bg.png');
     // 加载
-    this.load.spritesheet('galaxing-anim', '/static/galaxing.png', {
+    this.load.spritesheet('galaxing-anim', 'static/galaxing.png', {
       frameWidth: 60,
       frameHeight: 40
     })
-    this.load.image('airplane', '/static/airplane.png')
-    this.load.image('bullet', '/static/bullet.png')
+    this.load.image('airplane', 'static/airplane.png')
+    this.load.image('bullet', 'static/bullet.png')
   }
 
   private create() {
     // 添加背景
     this.background = this.add.tileSprite(0, 0, config.width * 2, config.height * 2, 'background')
     // 添加文字
-    var progressText = this.add.text(100, 280, '开始游戏', {
+    var progressText = this.add.text(0, 0, '开始游戏', {
       fontSize: '48px',
       fontFamily: 'Arial',
       color: '#ffffff',
@@ -30,6 +30,10 @@ export default class Start extends Phasar.Scene {
         fontSize: 55
       }
     })
+    progressText.x = config.width / 2 - progressText.width / 2
+    progressText.y = config.height/ 2 - progressText.height/ 2 
+
+    // Phaser.Display.Align.In.Center(progressText, this.add.zone(0, 0, 300, 300));
     // 添加键盘监听
     this.cursors = this.input.keyboard.createCursorKeys();
   }

@@ -12,11 +12,12 @@ export default class Play extends Phasar.Scene {
   private background
   private attacks: Phasar.GameObjects.Group
   private level = 1
-  private gameOver = false
+  private gameOver: boolean
   public preload() {
   }
 
   public create() {
+    this.gameOver = false
     // TODO:分数&时间
     this.attacks = this.add.group()
 

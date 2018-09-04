@@ -9,7 +9,8 @@ export default class Victory extends Phasar.Scene {
   private create() {
     this.background = this.add.tileSprite(0, 0, config.width * 2, config.height * 2, 'background')
 
-    var progressText = this.add.text(100, 280, '游戏胜利', {
+   
+    var progressText = this.add.text(0, 0, '游戏胜利', {
       fontSize: '48px',
       fontFamily: 'Arial',
       color: '#ffffff',
@@ -19,6 +20,9 @@ export default class Victory extends Phasar.Scene {
         fontSize: 55
       }
     })
+    progressText.x = config.width / 2 - progressText.width / 2
+    progressText.y = config.height / 2 - progressText.height / 2
+
 
     this.input.keyboard.on('keydown', (event) => {
       if (event.code === 'Space') {

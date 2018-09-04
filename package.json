@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "build":"pacrel build index.html"
+    "build": "parcel build index.html",
+    "publish": "parcel build index.html --public-url='/fc-bee' && gulp deploy"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
     "parcel-bundler": "^1.9.7",
     "parcel-plugin-static": "^1.0.0",
     "typescript": "^3.0.3"
