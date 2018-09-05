@@ -20,18 +20,21 @@ export default class Start extends Phasar.Scene {
     // 添加背景
     this.background = this.add.tileSprite(0, 0, config.width * 2, config.height * 2, 'background')
     // 添加文字
-    var progressText = this.add.text(0, 0, '开始游戏', {
-      fontSize: '48px',
-      fontFamily: 'Arial',
-      color: '#ffffff',
-      metrics: {
-        ascent: 45,
-        descent: 10,
-        fontSize: 55
-      }
-    })
+    var progressText = this.add.text(0, 0,
+      '开始游戏\r\n[空格]: 射击\r\n[方向]: 移动'
+      , {
+        fontSize: '28px',
+        fontFamily: 'Arial',
+        color: '#ffffff',
+        align: 'center',
+        metrics: {
+          ascent: 45,
+          descent: 10,
+          fontSize: 55
+        }
+      })
     progressText.x = config.width / 2 - progressText.width / 2
-    progressText.y = config.height/ 2 - progressText.height/ 2 
+    progressText.y = config.height / 2 - progressText.height / 2
 
     // Phaser.Display.Align.In.Center(progressText, this.add.zone(0, 0, 300, 300));
     // 添加键盘监听

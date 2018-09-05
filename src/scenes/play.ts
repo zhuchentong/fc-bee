@@ -13,11 +13,14 @@ export default class Play extends Phasar.Scene {
   private attacks: Phasar.GameObjects.Group
   private level = 1
   private gameOver: boolean
+  private score = 0
+  private scoreText: Phasar.GameObjects.Text
   public preload() {
   }
 
   public create() {
     this.gameOver = false
+    this.score = 0
     // TODO:分数&时间
     this.attacks = this.add.group()
 
@@ -29,14 +32,21 @@ export default class Play extends Phasar.Scene {
 
     // 创建子弹列表
     this.bullets = this.physics.add.group()
-
+    console.log(123)
+    this.cursors = null
     // 添加交互监听
     this.cursors = this.input.keyboard.createCursorKeys();
     // 飞机射击处理
     this.onPlayerFire()
+    for (let item in this.cursors) {
+      this.cursors[item].isDown = false
+    }
+    // this.scoreText = this.add.text(0, 0, this.score.toString())
   }
 
   public update() {
+    // this.scoreText.text = this.score.toString()
+    // this.scoreText.update()
     // 背景滚动效果
     this.background.tilePositionY -= 0.5
     // 飞机移动处理
@@ -57,9 +67,12 @@ export default class Play extends Phasar.Scene {
     // 游戏失败检测
     this.onDefeat()
   }
+
   onDefeat() {
     if (this.gameOver) {
-      this.scene.start('defeat')
+      this.scene.start('over', {
+        state: '游戏失败'
+      })
     }
   }
   /**
@@ -68,7 +81,9 @@ export default class Play extends Phasar.Scene {
   onVictory() {
     if (this.bees.getLength() <= 0) {
       //TODO:游戏胜利
-      this.scene.start('victory')
+      this.scene.start('over', {
+        state: '游戏胜利'
+      })
     }
   }
 
@@ -85,6 +100,8 @@ export default class Play extends Phasar.Scene {
       bullet.visible = false
       bullet.active = false
       this.bullets.remove(bullet)
+
+      this.score += 1
     }, null);
 
     // 玩家蜜蜂碰撞检测
@@ -166,6 +183,8 @@ export default class Play extends Phasar.Scene {
     // 创建蜜蜂小分队
     map.forEach((item, index) => {
       var bee = this.add.sprite(((index % 6) * 40) + 80, Math.floor(index / 6) * 30 + 30, 'galaxing-anim')
+      // console.log(bee)
+      // bee.data = new Phasar.Data.DataManager()
       bee.setScale(0.5)
       bee.active = true
 
@@ -232,6 +251,7 @@ export default class Play extends Phasar.Scene {
     this.player = this.physics.add.sprite(width / 2, height - 120 / 2, 'airplane')
     this.player.scaleX = 0.5
     this.player.scaleY = 0.5
+    this.player.setCollideWorldBounds(true);
   }
 
   /**
